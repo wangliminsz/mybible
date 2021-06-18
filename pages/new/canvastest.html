@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="canvas" width=80 height=300></canvas>
+
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        var text = "But if any of you lacketh wisdom, let him ask of God, who giveth to all liberally and upbraideth not; and it shall be given him.  But let him ask in faith, nothing doubting: for he that doubteth is like the surge of the sea driven by the wind and tossed.   …… and the rich, in that he is made low: because as the flower of the grass he shall pass away.  For the sun ariseth with the scorching wind, and withereth the grass: and the flower thereof falleth, and the grace of the fashion of it perisheth: so also shall the rich man fade away in his goings.  ";
+        wrapText(ctx, text, 20, 20, 80, 18);
+
+        function wrapText(context, text, x, y, maxWidth, fontSize, fontface) {
+            var words = text.split(' ');
+            var line = '';
+            var lineHeight = fontSize + 10;
+
+            context.font = fontSize + "px " + fontface;
+
+            for (var n = 0; n < words.length; n++) {
+                var testLine = line + words[n] + ' ';
+                var metrics = context.measureText(testLine);
+                var testWidth = metrics.width;
+                if (testWidth > maxWidth - 20) {
+                    context.fillStyle = "#a3a353";
+                    context.fillText(line, x, y);
+                    line = words[n] + ' ';
+                    y += lineHeight;
+                } else {
+                    line = testLine;
+                }
+            }
+            context.fillType = "#a3a353";
+            context.fillText(line, x, y);
+        }
+    </script>
+
+</body>
+
+</html>
